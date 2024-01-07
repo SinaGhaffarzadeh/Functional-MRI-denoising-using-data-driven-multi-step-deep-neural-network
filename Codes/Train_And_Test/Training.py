@@ -1,5 +1,3 @@
-
-
 import sys
 import h5py
 import numpy as np
@@ -11,6 +9,11 @@ from os import listdir
 from os.path import isfile, join
 from tensorflow.keras.utils import plot_model
 
+# %cd "/content/drive/MyDrive/"
+
+# from Evaluation import Evaluation 
+# from Model import ModelAndObjectiveFunction
+# from Preprocessing import funcs
 
 datadir = "/content/drive/MyDrive/project/HCP/data/simo/Gaussian"
 %cd "/content/drive/MyDrive/project/HCP/data/simo/Gaussian"
@@ -29,6 +32,7 @@ mean_SNR_Box1 = []
 
 intermediate_output_loss= []
 
+np.random.seed(42)
 
 subjlist = listdir(datadir)
 
@@ -42,7 +46,7 @@ fMRIdata,fMRIdata_GM,fMRIdata_nonGM,Cor,tre_nonGM,tre_GM,Cor_nonGM,Cor_GM,Cor_tg
                                                                                                                    "Cor_tgtlure1",'tre_WM_sc23','sc23_new',
                                                                                                                    'tre_GM_sc1','sc1_new'))
 # Preprocessing part
-fMRIdata_GM_train, fMRIdata_nonGM_train, X, pinvX, n_q = PreProcessing(fMRIdata,fMRIdata_GM, fMRIdata_nonGM, X, sc23_new, Cor, tre_GM)
+fMRIdata_GM_train, fMRIdata_nonGM_train, X, pinvX, n_q, sc23_new_nor_arg, massk = PreProcessing(fMRIdata,fMRIdata_GM, fMRIdata_nonGM, X, sc23_new, Cor, tre_GM)
 
 # Calculating primary SNR in Gray-matter and non-Gray matter
 SNR_GM = signaltonoise(fMRIdata_GM_train[:,:,0].reshape(fMRIdata_GM_train[:,:,0].shape[0],fMRIdata_GM_train[:,:,0].shape[1]).T)
