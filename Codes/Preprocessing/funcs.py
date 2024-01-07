@@ -1,6 +1,6 @@
-
 import h5py
 import numpy as np
+from scipy.stats.mstats import zscore
 
 
 def readMatVars(filepath,varname):
@@ -40,7 +40,7 @@ def PreProcessing(fMRIdata,fMRIdata_GM, fMRIdata_nonGM, X, sc23, Cor, tre_GM):
   matter voxels using probebility mask of structural MRI data and its segments.   
   --------------------------------------------------------------------------
   Iputs of this function:
-    fMRIdata : Row fMRI
+    fMRIdata : Raw fMRI
     fMRIdata_GM : Extracted Gray matter segment from fMRI data
     fMRIdata_nonGM: Extracted non-Gray matter (White and CSF) from fRMI data
     X : 
@@ -50,8 +50,9 @@ def PreProcessing(fMRIdata,fMRIdata_GM, fMRIdata_nonGM, X, sc23, Cor, tre_GM):
   ---------------------------------------------------------------------------
   Output
     fMRIdata_GM_train, fMRIdata_nonGM_train
+    pinvX, n_q, sc23_new_nor_arg, massk
   """
-  
+
   # Creating a mask to apply on Gray-matter and select voxels to process
   Cor = np.reshape(Cor,(Cor.size,))
   mask_q = np.ones((fMRIdata.shape[0],))
@@ -83,4 +84,4 @@ def PreProcessing(fMRIdata,fMRIdata_GM, fMRIdata_nonGM, X, sc23, Cor, tre_GM):
   fMRIdata_nonGM_train = fMRIdata_nonGM[sc23_new_nor_arg[:fMRIdata_GM_train.shape[0]],:]
   fMRIdata_nonGM_train = np.reshape(fMRIdata_nonGM_train,fMRIdata_nonGM_train.shape+(1,))
 
-  return fMRIdata_GM_train, fMRIdata_nonGM_train
+  return fMRIdata_GM_train, fMRIdata_nonGM_train, X, pinvX, n_q, sc23_new_nor_arg, massk
