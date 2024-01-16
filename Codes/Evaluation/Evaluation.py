@@ -13,8 +13,8 @@ from Evaluation import Evaluation_func
 from Model import ModelAndObjectiveFunction
 from Preprocessing import funcs
 
-datadir = "F:\\Sina\\Data-Driven\\Codes\\Data"
-weightsdir= "F:\\Sina\\Data-Driven\\Codes\\Weights"
+datadir = "...\\Codes\\Data"
+weightsdir= "...\\Codes\\Weights"
 os.chdir(datadir)
 
 subjlist = listdir(datadir)
