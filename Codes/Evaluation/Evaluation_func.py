@@ -1,4 +1,6 @@
 
+import numpy as np
+
 def correlation_coefficient(y_true, y_pred):
     x = y_true
     y = y_pred
@@ -36,9 +38,48 @@ def correlation(act, simu):
   r = np.mean(r)
   return r
 
-def corr(pre):
+def corr(pre,X,pinvX):
   Y = pre # fMRI
   Y = Y - np.mean(Y,axis = -1,keepdims=True)
   beta = np.dot(Y,pinvX)
   Yest = np.dot(beta,X.T)
   return correlation(Y,Yest)
+
+
+def Activity_map(Y,X,mask):
+  '''
+  Y: zscore(fMRIdata.T)
+  X: X_tgtlure
+  Output: Activity Map
+
+  '''
+  
+  C = np.array([1,0,-1]).T.reshape(3,1)
+  Nreg,Ncon= C.shape
+  tdim,N= Y.shape
+  #  numpy.dot(Y,pinvX)
+  beta = np.dot( np.linalg.pinv(X),Y)
+  Yest = np.dot(X,beta)
+  cor = np.zeros((N,1))
+  const = np.zeros((N,Ncon))
+
+  opt_Yind = 1
+  for i in range(N):
+    cor[i]=np.correlate(Y[:,i],Yest[:,i])
+    alpha = 1
+    opt_Y = Y[:,0].reshape(390,1)
+    opt_alp = alpha
+    B =  np.linalg.pinv(X).dot(opt_Y)
+    [tdim,r] = X.shape
+    Ealpha = np.dot(((opt_Y*opt_alp)-(np.dot(X,B)*opt_alp)).T,((opt_Y*opt_alp)-(np.dot(X,B)*opt_alp)))
+
+    #hypothesis matrix
+    NoConst = C.shape[1]
+    Halpha = np.zeros((NoConst,1))
+
+  mask_resh = mask.reshape(902629,1)
+  size=mask.shape
+  Map=np.zeros((np.prod(size),1));
+  Map[mask_resh[:,0]==1,:]=cor;
+  
+  return Map
