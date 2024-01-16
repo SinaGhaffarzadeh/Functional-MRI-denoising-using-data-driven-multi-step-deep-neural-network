@@ -34,7 +34,7 @@ def exp_decay(epoch):
    lrate = initial_lrate * np.exp(-k*epoch)
    return lrate
 
-def PreProcessing(fMRIdata,fMRIdata_GM, fMRIdata_nonGM, X, sc23, Cor, tre_GM):
+def PreProcessing(fMRIdata,fMRIdata_GM, fMRIdata_nonGM, X, sc23, Cor, tre_GM,training_type='real_data'):
   """
   PreProcessing function use for select and extract Gray matter & non-Gray 
   matter voxels using probebility mask of structural MRI data and its segments.   
@@ -67,10 +67,14 @@ def PreProcessing(fMRIdata,fMRIdata_GM, fMRIdata_nonGM, X, sc23, Cor, tre_GM):
   pinvX = pinvX.T
 
   # Normalize preprocessed data (Gray-matter and non-Gray matter) using Zscore
-  fMRIdata_GM = zscore(fMRIdata_GM,axis=-1)
-  fMRIdata_GM = np.reshape(fMRIdata_GM,fMRIdata_GM.shape+(1,))
-  fMRIdata_nonGM = zscore(fMRIdata_nonGM,axis=-1)
-  n_q = np.sum(massk==1)
+  if training_type == 'real':
+    fMRIdata_GM = zscore(fMRIdata_GM,axis=-1)
+    fMRIdata_GM = np.reshape(fMRIdata_GM,fMRIdata_GM.shape+(1,))
+    fMRIdata_nonGM = zscore(fMRIdata_nonGM,axis=-1)
+    n_q = np.sum(massk==1)
+  else:
+    fMRIdata_GM = np.reshape(fMRIdata_GM,fMRIdata_GM.shape+(1,))
+    n_q = np.sum(massk==1)
 
   # Apply mask on Gray-matter data to select voxels
   fMRIdata_GM_train = fMRIdata_GM[massk==1,:,:]
