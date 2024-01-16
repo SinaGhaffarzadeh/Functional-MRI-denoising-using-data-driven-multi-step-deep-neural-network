@@ -9,7 +9,6 @@ import tensorflow.keras.backend as T
 from tensorflow.keras.losses import mse
 from tensorflow.keras.constraints import non_neg
 
-%matplotlib inline
 
 
 # lstmCCA_model
