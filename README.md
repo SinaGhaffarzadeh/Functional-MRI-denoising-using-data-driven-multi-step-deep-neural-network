@@ -11,5 +11,6 @@ In this study a novel method for sampling the active and noisy areas is proposed
 ![MSDNN flow chart](https://github.com/SinaGhaffarzadeh/Functional-MRI-denoising-using-data-driven-multi-step-deep-neural-network/blob/master/Images/MSDNN.jpg?raw=true)
 
 
-rest-fMRI data : https://www.transfernow.net/dl/20240116HuGli16f
-
+rest-fMRI data : 
+task-based fMRI data : 
+Structural MRI data : 
