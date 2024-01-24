@@ -63,7 +63,7 @@ fMRIdatanii = load_untouch_nii([datadir,'\rfMRI_REST1_RL.nii']);
 fMRIdata = fMRIdatanii.img;
 fMRIdata = permute(fMRIdata,[4,1,2,3]);
 % Normalize and Select 390 time-point from 1200 time-point
-fMRIdata = fMRIdata(400:789,:,:,:);
+fMRIdata = fMRIdata(201:590,:,:,:);
 mask = squeeze(fMRIdata(1,:,:,:))>0;
 fMRIdata = fMRIdata(:,mask>0);
 % Remove polynomial trend and Normalize it
