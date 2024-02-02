@@ -33,7 +33,7 @@ Although you able to do this processing yourself, there `/Data/` we did carry ou
 ### .Real data
 If you want to use real tfMRI data in denoising process you should just run `Codes/Preprocessing/HCP_Real_tfMRI.m` to extract segments of Gray matter and non-Gray matter and some other neccessery information.
 
-
+### Training
 After carry out one of these processing we can able to apply our de-noising approach (`MSDNN`)on that. To start de-noising process you should use `Codes/Train_And_Test/TrainTest.py`.
 This code able to compute preprocessing, training, testing, and evaluaving our input data that you got them from .mat code.
 
