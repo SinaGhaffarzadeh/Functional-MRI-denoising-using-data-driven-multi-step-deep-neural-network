@@ -8,5 +8,5 @@ Here is an implementation of the MSDNN model for de-noising task based functiona
 
 
 # Data
-In this implementation we focused on Working-Memory fMRI data that you can download them form Human connectome project (HCP) that each data consist of Structural, Rest and Task functional MRI data. 
+In this implementation we focused on Working-Memory fMRI data that you can download them form [Human connectome project (HCP)]( https://www.humanconnectome.org/) that each data consist of Structural, Rest and Task functional MRI data. 
 
