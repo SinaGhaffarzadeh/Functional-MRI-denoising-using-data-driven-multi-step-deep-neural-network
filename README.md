@@ -18,7 +18,7 @@ Although you can download these data from there, we upload some data in our [goo
 </p>
 
 
-#How to train the model
+# How to train the model
 
 ## Step One
 Before start training process, fist of all, extract all '.rar' files in thier path. after that, please download exisiting data from 'Google Drive' and put 'T1w.nii' in 'Structural folder' , 'tfMRI_WM_LR.nii' in 'tfMRI folder', and 'rest_fMRI_Gaussian.mat & rest_fMRI_regions.mat' in 'data floder' where the our data should be in there.
@@ -26,9 +26,9 @@ Before start training process, fist of all, extract all '.rar' files in thier pa
 ## Step Two
 In this framwork we have two training part (Denoising Simulated and Real tfMRI data).
 
-###.Simulate tFMRI
+### .Simulate tFMRI
 If you want to simulate tfMRI data you should download rest-fMRI data from HCP and add it up to 'fMRI foldor'. After that, you'll able to run 'Codes/Preprocessing/HCP_Simulation_tfMRI.m' to construct the simulated tfMRI.
-###.Real data
+### .Real data
 If you want to use real tfMRI data in denoising process you should just run 'Codes/Preprocessing/HCP_Real_tfMRI.m' to extract segments of Gray matter and non-Gray matter and some other neccessery information.
 
 
